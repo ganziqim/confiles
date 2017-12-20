@@ -1,7 +1,7 @@
 " 插件管理
 " {{{
 set nocompatible " Required
-filetpye off
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
