@@ -1,0 +1,1 @@
+tmux att -t 0
