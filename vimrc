@@ -1,5 +1,4 @@
 " 插件管理
-" {{{
 set nocompatible " Required
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -16,13 +15,13 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
 
 call vundle#end()
 filetype plugin indent on
-" }}}
 
 "一些特殊配置项(非set)
-"{{{
 
 "语法高亮
 if has("syntax")
@@ -45,22 +44,23 @@ syntax enable
 set background=dark
 colorscheme solarized
 hi Normal guibg=#000000
-"}}}
 
 "大多数SET
-"{{{
+
+" mac下使用系统剪切板
+set clipboard=unnamed
 
 "禁止生成临时文件
 set nobackup
 set noswapfile
 
-" 高亮列  hi colorcolumn
-autocmd FileType python,c set colorcolumn=76
+" 高亮列 hi colorcolumn
+autocmd FileType python,c set colorcolumn=80
 
 set nocp        "设置为扩展模式
 set hidden
-set showtabline=0
-
+set showtabline=2
+set noshowmode
 set laststatus=2 "显示状态栏
 
 "关于折叠
@@ -119,11 +119,7 @@ set ignorecase
 "vim 自身命令行模式智能补全
 set wildmenu
 
-"}}}
-
 "一些MAP 和插件配置
-"{{{
-"
 let g:neocomplete#enable_at_startup = 1
 
 map gb :TagbarToggle<CR>
@@ -140,12 +136,22 @@ let NERDTreeQuitOnOpen=1 "打开文件后自动关闭树
 let NERDTreeWinPos='left'  "显示的窗体位置
 nnoremap gt :NERDTreeToggle<cr>  "设置映射键位
 autocmd vimenter * NERDTree
-
+" 不显示这些文件
+let NERDTreeIgnore=['\.pyc$', 'node_modules']
+" 不显示项目树上额外的信息，例如帮助、提示什么的
+let NERDTreeMinimalUI=1
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" ctrlp配置
+let g:ctrlp_map = 'tg'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|pyc)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 nnoremap to :tabnew<CR>
 nnoremap tn :tabnext<CR>
