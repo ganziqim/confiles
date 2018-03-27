@@ -7,22 +7,27 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
-Plug 'bling/vim-airline'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'altercation/vim-colors-solarized'
-Plug 'scrooloose/syntastic'
-Plug 'nvie/vim-flake8'
+Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Raimondi/delimitMate'
+Plug 'fholgado/minibufexpl.vim'
 Plug 'hotoo/pangu.vim'
+Plug 'majutsushi/tagbar'
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Python Plugins
+Plug 'nvie/vim-flake8'
+
+" Golang Plugins
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'scrooloose/nerdcommenter'
-Plug 'fholgado/minibufexpl.vim'
-" Plug 'powerline/powerline'
+
+" deoplete on neovim and neocomplete on other
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -34,14 +39,14 @@ endif
 
 call plug#end()
 
-"一些特殊配置项(非set)
+" 特殊配置项
 
-"语法高亮
+" 语法高亮
 if has("syntax")
   syntax on
 endif
 
-"开启类型插件支持(pyflakes)
+" 开启类型插件支持(pyflakes)
 filetype on
 filetype plugin on
 
@@ -49,7 +54,7 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
-" gui 启动时最大化
+" GUI 启动时最大化
 
 if has('gui_running') && has('win32')
   au GUIEnter * simalt ~x
@@ -75,7 +80,7 @@ set guioptions-=r
 " 禁止显示工具条
 set guioptions-=T
 
-"大多数SET
+" SET
 
 " mac下使用系统剪切板
 set clipboard=unnamed
@@ -87,28 +92,29 @@ set noswapfile
 " 高亮列 hi colorcolumn
 autocmd FileType python,c set colorcolumn=80
 
-set nocp        "设置为扩展模式
+" 设置为扩展模式
+set nocp
 set hidden
 set showtabline=2
 set noshowmode
 " 显示状态栏
 set laststatus=2
 
-"关于折叠
+" 关于折叠
 set foldenable
 set foldmethod=marker
 
 " Tab切换成4个空格
 set tabstop=4
-autocmd FileType  html,javascript,css,yaml set tabstop=2
+autocmd FileType html,javascript,css,yaml set tabstop=2
 
-"Tab转换为空格 公司fix
+" Tab转换为空格 公司fix
 " set expandtab
-autocmd FileType  make set noexpandtab
+autocmd FileType make set noexpandtab
 
 set autoindent
 
-" encoding
+" 编码设置
 
 " Vim 内部缓冲、菜单、消息的字符编码
 set encoding=utf-8
@@ -168,7 +174,7 @@ nnoremap tp :tabprev<CR>
 
 " leader mapping
 
-let mapleader=","
+let mapleader=','
 
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -179,13 +185,17 @@ nnoremap <leader>w :w<CR>
 
 " 插件配置
 
+" tagbar
+
 map gb :TagbarToggle<CR>
 let g:tagbar_width = 30
+
+" airline
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-" 配置NERDTREE
+" 配置NERDTree
 let NERDChristmasTree=1 "装饰窗体!
 let NERDTreeHighlightCursorline=1 "高亮选中行
 let NERDTreeQuitOnOpen=1 "打开文件后自动关闭树
@@ -201,16 +211,16 @@ let NERDTreeMinimalUI=1
 
 " NERDCommenter 配置
 " 在注释后加空格
-" let g:NERDSpaceDelims=1
+let g:NERDSpaceDelims=1
 " 可以注释空行
-" let g:NERDCommenterEmptyLines=1
+let g:NERDCommenterEmptyLines=1
 
 " Powerline
 " let g:Powerline_colorscheme='solarized256'
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " ctrlp配置
 let g:ctrlp_map = 'tg'
@@ -242,3 +252,51 @@ iabbrev @@ ganziqim@live.com
 
 autocmd FileType python nnoremap gd :call append(line("."),'__import__("pdb").set_trace()')<CR>
 autocmd FileType python nnoremap gp :call append(line("."),'__import__("pprint").pprint(None)')<CR>
+
+" 自动补全设置
+
+" 补全完成后自动关闭提示窗口
+augroup complete
+  autocmd!
+  autocmd CompleteDone * pclose
+augroup end
+
+
+" 使用 Tab 键进行补全，来自 https://gist.github.com/chemzqm/287b0e98560e2e0a1491
+" Take <tab> for word complete only
+" The 'complete' option controls where the keywords are searched (include files, tag files, buffers, and more).
+" The 'completeopt' option controls how the completion occurs (for example, whether a menu is shown).
+
+if exists('did_completes_me_loaded') || v:version < 700
+  finish
+endif
+let did_completes_me_loaded = 1
+
+function! s:completes_me(shift_tab)
+  let dirs = ["\<c-p>", "\<c-n>"]
+
+  if pumvisible()
+    if a:shift_tab
+      return dirs[0]
+    else
+      return dirs[1]
+    endif
+  endif
+
+  " Figure out whether we should indent.
+  let pos = getpos('.')
+  let substr = matchstr(strpart(getline(pos[1]), 0, pos[2]-1), "[^ \t]*$")
+  if strlen(substr) == 0 | return "\<Tab>" | endif
+
+  if a:shift_tab
+    return "\<c-p>"
+  else
+    return "\<c-n>"
+  endif
+endfunction
+
+inoremap <expr> <plug>completes_me_forward  <sid>completes_me(0)
+inoremap <expr> <plug>completes_me_backward <sid>completes_me(1)
+
+imap <Tab>   <plug>completes_me_forward
+imap <S-Tab> <plug>completes_me_backward
