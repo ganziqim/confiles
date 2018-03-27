@@ -8,7 +8,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
-Plug 'Shougo/neocomplete'
 Plug 'bling/vim-airline'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
@@ -18,6 +17,17 @@ Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
+Plug 'hotoo/pangu.vim'
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+else
+  Plug 'Shougo/neocomplete'
+  let g:neocomplete#enable_at_startup = 1
+endif
 
 call plug#end()
 
@@ -119,8 +129,20 @@ set ignorecase
 "vim 自身命令行模式智能补全
 set wildmenu
 
-"一些MAP 和插件配置
-let g:neocomplete#enable_at_startup = 1
+" 自定义 mapping
+
+" 上下移动行
+nnoremap _ ddkkp
+nnoremap - ddp
+
+vnoremap _ U
+vnoremap - u
+
+nnoremap to :tabnew<CR>
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprev<CR>
+
+" 插件配置
 
 map gb :TagbarToggle<CR>
 let g:tagbar_width = 30
@@ -128,14 +150,13 @@ let g:tagbar_width = 30
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-
 "配置NERDTREE
 let NERDChristmasTree=1 "装饰窗体!
 let NERDTreeHighlightCursorline=1 "高亮选中行
 let NERDTreeQuitOnOpen=1 "打开文件后自动关闭树
 let NERDTreeWinPos='left'  "显示的窗体位置
 nnoremap gt :NERDTreeToggle<cr>  "设置映射键位
-autocmd vimenter * NERDTree
+autocmd VimEnter * NERDTree
 " 不显示这些文件
 let NERDTreeIgnore=['\.pyc$', 'node_modules']
 " 不显示项目树上额外的信息，例如帮助、提示什么的
@@ -153,9 +174,15 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-nnoremap to :tabnew<CR>
-nnoremap tn :tabnext<CR>
-nnoremap tp :tabprev<CR>
+" pangu.vim 配置
+
+autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+
+" 自定义 iabbrev
+
+iabbrev @@ ganziqim@live.com
+
+" 自定义 autocmd
 
 autocmd FileType python nnoremap gd :call append(line("."),'__import__("pdb").set_trace()')<CR>
 autocmd FileType python nnoremap gp :call append(line("."),'__import__("pprint").pprint(None)')<CR>
