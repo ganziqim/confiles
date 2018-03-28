@@ -12,7 +12,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'hotoo/pangu.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
@@ -247,7 +246,8 @@ imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 
-" ctrlp配置
+" ctrlp 配置
+
 let g:ctrlp_map = 'tg'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -256,16 +256,6 @@ let g:ctrlp_custom_ignore = {
   \ }
 " 使用最近的 .git 作为工作目录
 let g:ctrlp_working_path_mode = 'r'
-
-" minibufexpl
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplMapWindowsNavVim=1
-let g:miniBufExplMapWindowNavArrows=1
-map <leader>tab :MBEToggle<CR>
-map <C-Tab> :MBEbn<CR>
-map <C-S-Tab> :MBEbp<CR>
-" 为了避免跟切换窗口冲突
-" map <C-S-W> :MBEbd<CR>
 
 " pangu.vim 配置
 
