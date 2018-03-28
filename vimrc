@@ -17,6 +17,7 @@ Plug 'hotoo/pangu.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'Raimondi/delimitMate'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -143,7 +144,7 @@ set ruler
 
 " 高亮显示当前行/列
 set cursorline
-set cursorcolumn
+" set cursorcolumn 影响 icon 显示
 
 " 选中的文本高亮
 set hlsearch
@@ -171,11 +172,11 @@ nnoremap - ddp
 vnoremap _ U
 vnoremap - u
 
-nnoremap bl :ls<CR>
-nnoremap bo :enew<CR>
-nnoremap bn :bnext<CR>
-nnoremap bp :bprevious<CR>
-nnoremap bw :bw<CR>
+nnoremap <silent> bl :ls<CR>
+nnoremap <silent> bo :enew<CR>
+nnoremap <silent> bn :bnext<CR>
+nnoremap <silent> bp :bprevious<CR>
+nnoremap <silent> bw :bw<CR>
 
 " leader mapping
 
@@ -203,7 +204,14 @@ let g:airline_powerline_fonts=1
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
 
+" vim-devicons
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+
 " NERDTree 配置
+
 " 装饰窗体
 let NERDChristmasTree=1
 " 高亮选中行
