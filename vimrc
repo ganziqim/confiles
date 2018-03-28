@@ -11,9 +11,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'hotoo/pangu.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -25,7 +27,7 @@ Plug 'nvie/vim-flake8'
 
 " Golang Plugins
 Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 " deoplete on neovim and neocomplete on other
 
@@ -92,8 +94,9 @@ set noswapfile
 " 高亮列 hi colorcolumn
 autocmd FileType python,c set colorcolumn=80
 
-" 设置为扩展模式
+" 设置不兼容 vi
 set nocp
+" 允许隐藏被修改过的 buffer
 set hidden
 set showtabline=2
 set noshowmode
@@ -168,9 +171,11 @@ nnoremap - ddp
 vnoremap _ U
 vnoremap - u
 
-nnoremap to :tabnew<CR>
-nnoremap tn :tabnext<CR>
-nnoremap tp :tabprev<CR>
+nnoremap bl :ls<CR>
+nnoremap bo :enew<CR>
+nnoremap bn :bnext<CR>
+nnoremap bp :bprevious<CR>
+nnoremap bw :bw<CR>
 
 " leader mapping
 
@@ -192,22 +197,34 @@ let g:tagbar_width = 30
 
 " airline
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='default'
+let g:airline_powerline_fonts=1
 
-" 配置NERDTree
-let NERDChristmasTree=1 "装饰窗体!
-let NERDTreeHighlightCursorline=1 "高亮选中行
-let NERDTreeQuitOnOpen=1 "打开文件后自动关闭树
-let NERDTreeWinPos='left'  "显示的窗体位置
-" 设置映射键位
-nnoremap gt :NERDTreeToggle<cr>
-" 启动时自动开启文件树
-autocmd VimEnter * NERDTree
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
+
+" NERDTree 配置
+" 装饰窗体
+let NERDChristmasTree=1
+" 高亮选中行
+let NERDTreeHighlightCursorline=1
+" 打开文件后自动关闭树
+let NERDTreeQuitOnOpen=1
+" 显示的窗体位置
+let NERDTreeWinPos='left'
+" 显示隐藏文件
+let NERDTreeShowHidden=1
 " 不显示这些文件
 let NERDTreeIgnore=['\.pyc$', 'node_modules']
 " 不显示项目树上额外的信息，例如帮助、提示什么的
 let NERDTreeMinimalUI=1
+" 设置映射键位
+nnoremap <silent> gt :NERDTreeToggle<CR>
+" 不指定文件启动时自动开启文件树
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" 只剩下 NERDTree 窗口的时候自动关闭 Vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDCommenter 配置
 " 在注释后加空格
@@ -226,9 +243,11 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 let g:ctrlp_map = 'tg'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pyc)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|class|png|jpg|jpeg)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+" 使用最近的 .git 作为工作目录
+let g:ctrlp_working_path_mode = 'r'
 
 " minibufexpl
 let g:miniBufExplMapCTabSwitchBufs=1
