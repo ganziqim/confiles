@@ -192,10 +192,17 @@ nnoremap <leader>w :w<CR>
 
 " 插件配置
 
+" vim-go
+
+let g:go_doc_keywordprg_enabled = 0
+
 " tagbar
 
 map gb :TagbarToggle<CR>
-let g:tagbar_width = 30
+let g:tagbar_width = 50
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_show_linenumers = 1
 
 " gitgutter
 
@@ -208,7 +215,10 @@ nnoremap <Leader>hr :GitGutterUndoHunk<CR>
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter='default'
+" 显示 buffer 编号，方便切换
+let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
+let g:airline_theme='solarized'
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
 
