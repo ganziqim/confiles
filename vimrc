@@ -20,10 +20,12 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Python Plugins
 Plug 'nvie/vim-flake8'
+Plug 'zchee/deoplete-jedi'
 
 " Golang Plugins
 Plug 'fatih/vim-go'
