@@ -195,6 +195,13 @@ nnoremap <leader>w :w<CR>
 map gb :TagbarToggle<CR>
 let g:tagbar_width = 30
 
+" gitgutter
+
+nnoremap <leader>hn :GitGutterNextHunk<CR>
+nnoremap <leader>hp :GitGutterPrevHunk<CR>
+nnoremap <Leader>ha :GitGutterStageHunk<CR>
+nnoremap <Leader>hr :GitGutterUndoHunk<CR>
+
 " airline
 
 let g:airline#extensions#tabline#enabled=1
