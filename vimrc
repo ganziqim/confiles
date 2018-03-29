@@ -153,6 +153,8 @@ set hlsearch
 " 设置空格和缩进的提示
 set list
 set listchars=tab:\|-,trail:=,extends:>,precedes:<
+" 编辑 .go 时不显示 tab
+autocmd FileType go set nolist
 
 " 启动时不显示提示
 set shortmess=atIW
@@ -177,7 +179,10 @@ nnoremap <silent> bl :ls<CR>
 nnoremap <silent> bo :enew<CR>
 nnoremap <silent> bn :bnext<CR>
 nnoremap <silent> bp :bprevious<CR>
-nnoremap <silent> bw :bw<CR>
+nnoremap <silent> bd :bdelete<CR>
+
+nnoremap J <C-y>
+nnoremap K <C-e>
 
 " leader mapping
 
@@ -257,13 +262,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDSpaceDelims=1
 " 可以注释空行
 let g:NERDCommenterEmptyLines=1
-
-" Powerline
-" let g:Powerline_colorscheme='solarized256'
-
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " ctrlp 配置
 
