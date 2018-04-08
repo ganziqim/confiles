@@ -10,8 +10,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
+Plug 'christoomey/vim-sort-motion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'FooSoft/vim-argwrap'
 Plug 'hotoo/pangu.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
@@ -50,7 +52,7 @@ if has("syntax")
   syntax on
 endif
 
-" 开启类型插件支持(pyflakes)
+" 开启类型插件支持 (pyflakes)
 filetype on
 filetype plugin on
 
@@ -71,6 +73,7 @@ syntax enable
 set background=dark
 colorscheme solarized
 hi Normal guibg=#000000
+hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
 
 " 字体设置
 set guifont=Source_Code_Pro:h11
@@ -86,12 +89,15 @@ set guioptions-=T
 
 " SET
 
-" mac下使用系统剪切板
+" mac 下使用系统剪切板
 set clipboard=unnamed
 
-"禁止生成临时文件
+" 禁止生成临时文件
 set nobackup
 set noswapfile
+
+" 允许使用鼠标
+set mouse=a
 
 " 高亮列 hi colorcolumn
 autocmd FileType python,c set colorcolumn=80
@@ -105,19 +111,25 @@ set noshowmode
 " 显示状态栏
 set laststatus=2
 
+set showmatch
+
 " 关于折叠
 set foldenable
-set foldmethod=marker
+set foldmethod=syntax
 
-" Tab切换成4个空格
+" Tab 切换成 4 个空格
 set tabstop=4
 autocmd FileType html,javascript,css,yaml set tabstop=2
+set shiftwidth=4
+set smarttab
 
-" Tab转换为空格 公司fix
-" set expandtab
-autocmd FileType make set noexpandtab
+" 以下格式的文件禁止 Tab 转换为空格
+autocmd FileType make,go set noexpandtab
 
 set autoindent
+set smartindent
+
+set autoread
 
 " 编码设置
 
@@ -143,7 +155,9 @@ set number
 " 显示光标当前位置
 set ruler
 
-" 高亮显示当前行/列
+set showcmd
+
+" 高亮显示当前行 / 列
 set cursorline
 " set cursorcolumn 影响 icon 显示
 
@@ -196,6 +210,12 @@ nnoremap <silent> <leader>m :nohlsearch<CR>
 nnoremap <leader>w :w<CR>
 
 " 插件配置
+
+" ArgWrap
+
+nnoremap <silent> <leader>a :ArgWrap<CR>
+" 展开 Python 代码时最后一行添加逗号
+autocmd FileType python let g:argwrap_tail_comma = 1
 
 " vim-go
 
@@ -284,8 +304,11 @@ iabbrev @@ ganziqim@live.com
 
 " 自定义 autocmd
 
-autocmd FileType python nnoremap gd :call append(line("."),'__import__("pdb").set_trace()')<CR>
-autocmd FileType python nnoremap gp :call append(line("."),'__import__("pprint").pprint(None)')<CR>
+augroup python_map
+    autocmd!
+    autocmd FileType python nnoremap gd :call append(line("."),'__import__("pdb").set_trace()')<CR>
+    autocmd FileType python nnoremap gp :call append(line("."),'__import__("pprint").pprint(None)')<CR>
+augroup END
 
 " 自动补全设置
 
