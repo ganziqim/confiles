@@ -27,14 +27,12 @@ nvim-update:
 
 tmux:
 	@cp ./tmux.conf ~/.tmux.conf
-	@echo "make sure that you configured the powerline correctly"
 
 tmux-update:
 	@cp ~/.tmux.conf ./tmux.conf
 
 zsh:
 	@cp ./zshrc ~/.zshrc
-	@echo "make sure that you configured the powerline correctly"
 
 zsh-update:
 	@cp ~/.zshrc ./zshrc
