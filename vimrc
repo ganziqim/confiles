@@ -8,7 +8,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-sort-motion'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -21,8 +20,11 @@ Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Python Plugins
@@ -32,6 +34,10 @@ Plug 'zchee/deoplete-jedi'
 " Golang Plugins
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+
+" Themes
+Plug 'altercation/vim-colors-solarized'
+Plug 'junegunn/seoul256.vim'
 
 " deoplete on neovim and neocomplete on other
 
@@ -71,9 +77,12 @@ endif
 " 配色方案
 syntax enable
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+let g:seoul256_background = 235
+colorscheme seoul256
 hi Normal guibg=#000000
 hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
+
 
 " 字体设置
 set guifont=Source_Code_Pro:h11
@@ -115,7 +124,7 @@ set showmatch
 
 " 关于折叠
 set foldenable
-set foldmethod=syntax
+set foldmethod=marker
 
 " Tab 切换成 4 个空格
 set tabstop=4
@@ -209,7 +218,13 @@ nnoremap <silent> <leader>m :nohlsearch<CR>
 
 nnoremap <leader>w :w<CR>
 
-" 插件配置
+" Plugins
+
+" Asyncrun
+
+let g:asyncrun_open = 10
+nnoremap <leader>cc :cclose<CR>
+nnoremap <leader>co :copen 10<CR>
 
 " ArgWrap
 
@@ -243,7 +258,7 @@ let g:airline#extensions#tabline#formatter='default'
 " 显示 buffer 编号，方便切换
 let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='solarized'
+let g:airline_theme='angr'
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
 
