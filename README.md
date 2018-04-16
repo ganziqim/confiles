@@ -1,4 +1,4 @@
-# confiles - Configuration files for Pythoner
+# confiles - Configuration files for Pythoner and Gopher
 
 [中文文档](https://github.com/ganziqim/confiles/blob/master/README_CN.md)
 

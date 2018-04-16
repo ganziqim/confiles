@@ -1,4 +1,4 @@
-# confiles - Configuration files for Pythoner
+# confiles - Configuration files for Pythoner and Gopher
 
 一键配置开发环境。
 
