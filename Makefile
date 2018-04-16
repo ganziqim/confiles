@@ -2,14 +2,16 @@
 
 all:
 	make vim
-	make vim-update
 	make nvim
-	make nvim-update
 	make tmux
-	make tmux-update
 	make zsh
-	make zsh-update
 	make git
+
+update:
+	make vim-update
+	make nvim-update
+	make tmux-update
+	make zsh-update
 	make git-update
 
 vim:
