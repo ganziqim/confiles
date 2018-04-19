@@ -23,8 +23,11 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/vimmake'
+Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -79,9 +82,9 @@ endif
 " 配色方案
 syntax enable
 set background=dark
-" colorscheme solarized
-let g:seoul256_background = 235
-colorscheme seoul256
+colorscheme solarized
+"let g:seoul256_background = 235
+"colorscheme seoul256
 hi Normal guibg=#000000
 hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
 
@@ -129,9 +132,13 @@ set foldenable
 set foldmethod=marker
 
 " Tab 切换成 4 个空格
+set expandtab
 set tabstop=4
-autocmd FileType html,javascript,css,yaml set tabstop=2
 set shiftwidth=4
+
+autocmd FileType html,javascript,css,yaml,json set tabstop=2
+autocmd FileType html,javascript,css,yaml,json set shiftwidth=2
+
 set smarttab
 
 " 以下格式的文件禁止 Tab 转换为空格
@@ -238,6 +245,13 @@ autocmd FileType python let g:argwrap_tail_comma = 1
 
 let g:go_doc_keywordprg_enabled = 0
 
+" easyclip
+
+nnoremap pp :IPaste<CR>
+let g:EasyClipUseSubstituteDefaults = 1
+let g:EasyClipAutoFormat = 1
+nnoremap <leader>yf :call EasyClip#Yank(expand('%'))<cr>
+
 " tagbar
 
 map gb :TagbarToggle<CR>
@@ -260,7 +274,8 @@ let g:airline#extensions#tabline#formatter='default'
 " 显示 buffer 编号，方便切换
 let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='angr'
+"let g:airline_theme='angr'
+let g:airline_theme='solarized'
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
 
@@ -313,7 +328,8 @@ let g:ctrlp_working_path_mode = 'r'
 
 " pangu.vim 配置
 
-autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+" 有性能问题，暂时不开启
+" autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
 
 " 自定义 iabbrev
 
