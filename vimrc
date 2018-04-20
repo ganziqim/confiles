@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'wellle/targets.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Python Plugins
@@ -210,6 +211,7 @@ vnoremap - u
 nnoremap <silent> bl :ls<CR>
 nnoremap <silent> bo :enew<CR>
 nnoremap <silent> bn :bnext<CR>
+nnoremap <silent> bq :bprevious<CR>
 nnoremap <silent> bp :bprevious<CR>
 nnoremap <silent> bd :bdelete<CR>
 
