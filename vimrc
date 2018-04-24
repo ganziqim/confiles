@@ -17,6 +17,7 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'hotoo/pangu.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'Raimondi/delimitMate'
@@ -103,6 +104,13 @@ hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
 
 " 字体设置
 set guifont=Source_Code_Pro:h11
+
+" quick fix window
+
+nnoremap cn :cnext<CR>
+nnoremap cp :cprevious<CR>
+nnoremap cx :cclose<CR>
+nnoremap co :copen 10<CR>
 
 " 禁止显示滚动条
 set guioptions-=L
@@ -245,8 +253,6 @@ nnoremap <leader>w :w<CR>
 " Asyncrun
 
 let g:asyncrun_open = 10
-nnoremap <leader>cc :cclose<CR>
-nnoremap <leader>co :copen 10<CR>
 
 " ArgWrap
 
@@ -257,6 +263,17 @@ autocmd FileType python let g:argwrap_tail_comma = 1
 " vim-go
 
 let g:go_doc_keywordprg_enabled = 0
+
+" grepper
+
+nnoremap <leader>g :Grepper -tool grep<CR>
+nnoremap <leader>G :Grepper -tool grep -cword<CR>
+command! TODO :Grepper
+            \ -noprompt
+            \ -tool git
+            \ -grepprg git grep -nIi '\(TODO\|FIXME\)'
+nmap go <plug>(GrepperOperator)
+xmap go <plug>(GrepperOperator)
 
 " easyclip
 
