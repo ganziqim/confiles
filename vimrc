@@ -24,6 +24,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'Shougo/denite.nvim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/vimmake'
 Plug 'svermeulen/vim-easyclip'
@@ -266,6 +267,34 @@ let g:asyncrun_open = 10
 nnoremap <silent> <leader>a :ArgWrap<CR>
 " 展开 Python 代码时最后一行添加逗号
 autocmd FileType python let g:argwrap_tail_comma = 1
+
+" denite
+
+nnoremap <leader>pf :call denite#start([{'name': 'grep', 'args': ['', '', '!']}])<CR>
+let s:insert_mode_mappings = [
+            \  ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+            \  ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+            \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+            \  ['<C-c', '<denite:quit>', 'noremap'],
+            \  ['<C-r>', '<denite:redraw>', 'noremap'],
+            \ ]
+let s:normal_mode_mappings = [
+            \   ["'", '<denite:toggle_select_down>', 'noremap'],
+            \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+            \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+            \   ['gg', '<denite:move_to_first_line>', 'noremap'],
+            \   ['sv', '<denite:do_action:vsplit>', 'noremap'],
+            \   ['sp', '<denite:do_action:split>', 'noremap'],
+            \   ['q', '<denite:quit>', 'noremap'],
+            \   ['r', '<denite:redraw>', 'noremap'],
+            \ ]
+for s:m in s:insert_mode_mappings
+    call denite#custom#map('insert', s:m[0], s:m[1], s:m[2])
+endfor
+for s:m in s:normal_mode_mappings
+    call denite#custom#map('normal', s:m[0], s:m[1], s:m[2])
+endfor
+unlet s:m s:insert_mode_mappings s:normal_mode_mappings
 
 " vim-go
 
