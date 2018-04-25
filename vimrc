@@ -14,6 +14,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/tmuxline.vim'
 Plug 'FooSoft/vim-argwrap'
+Plug 'honza/vim-snippets'
 Plug 'hotoo/pangu.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar'
@@ -25,6 +26,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
+Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/vimmake'
 Plug 'svermeulen/vim-easyclip'
@@ -332,6 +334,10 @@ nnoremap <leader>p :IPaste<CR>
 let g:EasyClipUseSubstituteDefaults = 1
 let g:EasyClipAutoFormat = 1
 nnoremap <silent> <leader>yf :call EasyClip#Yank(expand('%'))<cr>:echo 'Filename copied'<CR>
+
+" ultisnips
+
+let g:UltiSnipsExpandTrigger="<c-o>"
 
 " tagbar
 
