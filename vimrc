@@ -46,6 +46,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'liuchengxu/space-vim-dark'
 Plug 'morhetz/gruvbox'
 
 " deoplete on neovim and neocomplete on other
@@ -87,10 +88,16 @@ endif
 syntax enable
 set background=dark
 
+let g:space_vim_dark_background = 235
+colorscheme space-vim-dark
+"hi Comment cterm=italic
+hi Search cterm=reverse gui=reverse
+"set termguicolors
+
 "colorscheme base16-solarized-dark
 "set termguicolors
 
-colorscheme gruvbox
+"colorscheme gruvbox
 "let g:gruvbox_contrast_dark='soft'
 
 "colorscheme solarized
@@ -99,7 +106,7 @@ colorscheme gruvbox
 "colorscheme seoul256
 
 hi Normal guibg=#000000
-hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
+"hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
 
 
 " 字体设置
@@ -304,11 +311,20 @@ let g:airline#extensions#tabline#formatter='default'
 " 显示 buffer 编号，方便切换
 let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='deus'
+let g:airline_theme='violet'
+"let g:airline_theme='deus'
 "let g:airline_theme='angr'
 "let g:airline_theme='solarized'
 
+" Startify
+
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
+let g:startify_bookmarks = ['~/.vimrc']
+let g:startify_update_oldfiles = 1
+" autoload Session.vim
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 1
 
 " vim-devicons
 
