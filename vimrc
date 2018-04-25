@@ -282,6 +282,21 @@ command! TODO :Grepper
 nmap go <plug>(GrepperOperator)
 xmap go <plug>(GrepperOperator)
 
+" easymotion
+
+map  <leader>f <plug>(easymotion-bd-f)
+nmap <leader>f <plug>(easymotion-overwin-f)
+
+map  <leader>F <plug>(easymotion-bd-f2)
+nmap <leader>F <plug>(easymotion-overwin-f2)
+
+" Move to line
+map <leader>l <plug>(easymotion-bd-jk)
+nmap <leader>l <plug>(easymotion-overwin-line)
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
 " easyclip
 
 nnoremap <leader>p :IPaste<CR>
