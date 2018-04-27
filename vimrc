@@ -13,10 +13,11 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/tmuxline.vim'
+Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
+Plug 'ganziqim/translator.vim'
 Plug 'honza/vim-snippets'
 Plug 'hotoo/pangu.vim'
-Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
@@ -351,8 +352,8 @@ let g:tagbar_show_linenumers = 1
 
 nnoremap <leader>hn :GitGutterNextHunk<CR>
 nnoremap <leader>hp :GitGutterPrevHunk<CR>
-nnoremap <Leader>ha :GitGutterStageHunk<CR>
-nnoremap <Leader>hr :GitGutterUndoHunk<CR>
+nnoremap <leader>ha :GitGutterStageHunk<CR>
+nnoremap <leader>hr :GitGutterUndoHunk<CR>
 
 " airline
 
@@ -381,12 +382,6 @@ let g:startify_change_to_vcs_root = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
-
-" mucomplete
-
-set completeopt=menuone,noinsert,noselect,preview
-set shortmess+=c
-let g:mucomplete#enable_auto_at_startup = 1
 
 " NERDTree 配置
 
@@ -429,6 +424,12 @@ let g:ctrlp_custom_ignore = {
 " 使用最近的 .git 作为工作目录
 let g:ctrlp_working_path_mode = 'r'
 
+" supertab
+
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabCrMapping = 1
+
 " pangu.vim 配置
 
 " 有性能问题，暂时不开启
@@ -445,11 +446,3 @@ augroup python_map
     autocmd FileType python nnoremap gd :call append(line("."),'__import__("pdb").set_trace()')<CR>
     autocmd FileType python nnoremap gp :call append(line("."),'__import__("pprint").pprint(None)')<CR>
 augroup END
-
-" 自动补全设置
-
-" 补全完成后自动关闭提示窗口
-augroup complete
-  autocmd!
-  autocmd CompleteDone * pclose
-augroup end
