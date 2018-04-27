@@ -229,6 +229,8 @@ set ignorecase
 " Vim 自身命令行模式智能补全
 set wildmenu
 
+set completeopt=menuone,preview,longest
+
 " 自定义 mapping
 
 " 上下移动行
@@ -429,6 +431,8 @@ let g:ctrlp_working_path_mode = 'r'
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
 
 " pangu.vim 配置
 
