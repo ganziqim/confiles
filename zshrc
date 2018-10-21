@@ -7,7 +7,8 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="amuse"
+# ZSH_THEME="af-magic"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -62,9 +63,20 @@ plugins=(
   git
   python
   osx
+  thefuck
   tmux
   virtualenv
 )
+
+# powerlevel9k settings
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon ssh root_indicator dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status background_jobs battery todo time)
+POWERLEVEL9K_BATTERY_LOW_THRESHOLD=25
+POWERLEVEL9K_TIME_FORMAT='%D{%Y.%m.%d %H:%M}'
+POWERLEVEL9K_DIR_SHOW_WRITABLE=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 export EDITOR="nvim"
+export GO111MODULE=on
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -101,3 +114,29 @@ export EDITOR="nvim"
 
 alias vi="nvim"
 alias vim="nvim"
+alias cat="bat"
+
+# git alias
+alias gfetch="git fetch"
+alias gfetchall="git fetch --all"
+alias grebase="git rebase"
+alias grebasemaster="git rebase origin/master"
+alias gcheckout="git checkout"
+alias gadd="git add"
+alias gaddall="git add --all"
+alias gbranch="git branch"
+alias gpush="git push"
+alias glog="git log"
+alias gdiff="git diff"
+alias gstatus="git status"
+alias gstash="git stash"
+alias gcommit="git commit"
+alias gamend="git commit --amend --no-edit"
+alias greset="git reset"
+
+alias lg="lazygit"
+alias todo="todo.sh"
+
+eval "$(thefuck --alias)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

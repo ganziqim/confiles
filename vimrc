@@ -16,12 +16,18 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
 Plug 'ganziqim/translator.vim'
+Plug 'godlygeek/tabular' " must come before vim-markdown
 Plug 'honza/vim-snippets'
 Plug 'hotoo/pangu.vim'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'lfv89/vim-interestingwords'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'plasticboy/vim-markdown'
 Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
@@ -38,13 +44,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Yggdroot/indentLine'
 
 " Python Plugins
 Plug 'zchee/deoplete-jedi'
 
 " Golang Plugins
 Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+"Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 " Themes
 Plug 'altercation/vim-colors-solarized'
@@ -88,18 +95,28 @@ endif
 
 " 显示效果配置
 
+" ColorScheme autocmd must before load colorscheme
+augroup VimrcColors
+  au!
+  autocmd ColorScheme * highlight MyTODO  ctermfg=3 guifg=#b58900
+  autocmd ColorScheme * highlight MyXXX   cterm=underline ctermfg=1 gui=underline guifg=#dc322f
+  autocmd ColorScheme * highlight MyFIXME ctermfg=10 ctermbg=9 guifg=#073642 guibg=#cb4b16
+augroup END
+
 " 配色方案
 syntax enable
-set background=dark
+"set background=dark
 
-let g:space_vim_dark_background = 235
-colorscheme space-vim-dark
+"let g:space_vim_dark_background = 235
+"colorscheme space-vim-dark
 "hi Comment cterm=italic
-hi Search cterm=reverse gui=reverse
+"hi Search cterm=reverse gui=reverse
 "set termguicolors
 
-"colorscheme base16-solarized-dark
-"set termguicolors
+colorscheme base16-solarized-dark
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 "colorscheme gruvbox
 "let g:gruvbox_contrast_dark='soft'
@@ -109,7 +126,7 @@ hi Search cterm=reverse gui=reverse
 "let g:seoul256_background = 235
 "colorscheme seoul256
 
-hi Normal guibg=#000000
+"hi Normal guibg=#000000
 "hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
 
 
@@ -121,7 +138,7 @@ set guifont=Source_Code_Pro:h11
 nnoremap cn :cnext<CR>
 nnoremap cp :cprevious<CR>
 nnoremap cx :cclose<CR>
-nnoremap co :copen 10<CR>
+nnoremap co :copen<CR>
 
 " 禁止显示滚动条
 set guioptions-=L
@@ -215,7 +232,7 @@ set hlsearch
 
 " 设置空格和缩进的提示
 set list
-set listchars=tab:\|-,trail:=,extends:>,precedes:<
+set listchars=tab:\|-,trail:·,extends:>,precedes:<
 " 编辑 .go 时不显示 tab
 autocmd FileType go set nolist
 
@@ -230,6 +247,10 @@ set ignorecase
 set wildmenu
 
 set completeopt=menuone,preview,longest
+
+" 自定义 command
+
+command! -bang -nargs=0 -range=0 GitPush call asyncrun#run('<bang>', '', '-raw git push', 3, <line1>, <line2>)
 
 " 自定义 mapping
 
@@ -247,15 +268,19 @@ nnoremap <silent> bq :bprevious<CR>
 nnoremap <silent> bp :bprevious<CR>
 nnoremap <silent> bd :bdelete<CR>
 
-nnoremap J <C-y>
-nnoremap K <C-e>
+nnoremap J 3<C-y>
+nnoremap K 3<C-e>
+
+nnoremap <silent> <C-s> :w<CR>
 
 " leader mapping
 
-let mapleader=','
+" https://stackoverflow.com/questions/446269/can-i-use-space-as-mapleader-in-vim
+" make sure you use double quotes
+let mapleader="\<space>"
 
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>:nohlsearch<CR>
 
 nnoremap <silent> <leader>m :nohlsearch<CR>
 
@@ -301,9 +326,27 @@ for s:m in s:normal_mode_mappings
 endfor
 unlet s:m s:insert_mode_mappings s:normal_mode_mappings
 
+" indentLine
+
+" json
+let g:indentLine_fileTypeExclude = ['json']
+
 " vim-go
 
 let g:go_doc_keywordprg_enabled = 0
+
+" vim-markdown
+
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_json_frontmatter = 0
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_conceal = 0
+
+" vim-markdown-toc
+
+let g:vmt_auto_update_on_save = 1
+let g:vmt_list_item_char = '-'
 
 " grepper
 
@@ -330,6 +373,10 @@ nmap <leader>l <plug>(easymotion-overwin-line)
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+
+" indentLine
+
+let g:indentLine_char = '│'
 
 " easyclip
 
@@ -364,14 +411,16 @@ let g:airline#extensions#tabline#formatter='default'
 " 显示 buffer 编号，方便切换
 let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='violet'
+"let g:airline_theme='violet'
 "let g:airline_theme='deus'
 "let g:airline_theme='angr'
-"let g:airline_theme='solarized'
+let g:airline_theme='solarized'
 
 " Startify
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
+" disable indentline in startify
+autocmd User Startified IndentLinesToggle
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_update_oldfiles = 1
 " autoload Session.vim
@@ -445,8 +494,20 @@ iabbrev @@ ganziqim@live.com
 
 " 自定义 autocmd
 
+" 通过各种手段打开文件的时候隐藏高亮
+autocmd BufEnter :nohlsearch<CR>
+
 augroup python_map
     autocmd!
     autocmd FileType python nnoremap gd :call append(line("."),'__import__("pdb").set_trace()')<CR>
     autocmd FileType python nnoremap gp :call append(line("."),'__import__("pprint").pprint(None)')<CR>
 augroup END
+
+if has("autocmd")
+    " Highlight TODO, FIXME, NOTE, etc.
+    if v:version > 701
+        autocmd Syntax * call matchadd('MyTODO',  '\c\V\zsTODO\ze')
+        autocmd Syntax * call matchadd('MyXXX', '\V\zsXXX\|HACK\ze')
+        autocmd Syntax * call matchadd('MyFIXME', '\V\zsFIXME\|BUG\ze')
+    endif
+endif
