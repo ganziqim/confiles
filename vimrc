@@ -11,11 +11,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-sort-motion'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dbeniamine/cheat.sh-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
 Plug 'ganziqim/translator.vim'
+Plug 'gcmt/wildfire.vim'
 Plug 'godlygeek/tabular' " must come before vim-markdown
 Plug 'honza/vim-snippets'
 Plug 'hotoo/pangu.vim'
@@ -41,10 +43,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-jp/vimdoc-ja'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
+Plug 'yianwillis/vimcdoc'
 
 " Python Plugins
 Plug 'zchee/deoplete-jedi'
@@ -366,6 +370,7 @@ nmap <leader>f <plug>(easymotion-overwin-f)
 
 map  <leader>F <plug>(easymotion-bd-f2)
 nmap <leader>F <plug>(easymotion-overwin-f2)
+let g:EasyMotion_enter_jump_first = 1
 
 " Move to line
 map <leader>l <plug>(easymotion-bd-jk)
@@ -450,6 +455,9 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc$', 'node_modules']
 " 不显示项目树上额外的信息，例如帮助、提示什么的
 let NERDTreeMinimalUI=1
+" 禁用 J 和 K 两个 Map
+let NERDTreeMapJumpFirstChild=''
+let NERDTreeMapJumpLastChild=''
 " 设置映射键位
 nnoremap <silent> gt :NERDTreeToggle<CR>
 " 不指定文件启动时自动开启文件树
@@ -463,6 +471,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDSpaceDelims=1
 " 可以注释空行
 let g:NERDCommenterEmptyLines=1
+
+" wildfire.vim
+
+map <leader>w <plug>(wildfire-fuel)
 
 " ctrlp 配置
 

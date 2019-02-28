@@ -86,6 +86,8 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR="nvim"
 export GO111MODULE=on
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -126,7 +128,7 @@ alias gadd="git add"
 alias gaddall="git add --all"
 alias gbranch="git branch"
 alias gpush="git push"
-alias glog="git log"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdiff="git diff"
 alias gstatus="git status"
 alias gstash="git stash"
@@ -134,9 +136,24 @@ alias gcommit="git commit"
 alias gamend="git commit --amend --no-edit"
 alias greset="git reset"
 
+# lazygit
 alias lg="lazygit"
+
+# TODO.txt
 alias todo="todo.sh"
+
+# HTTPie
+alias https='http --default-scheme=https'
+
+alias ping='prettyping --nolegend'
+alias top='htop'
+alias help='tldr'
+alias cht='cht.sh'
+alias wttr='curl zh.wttr.in\/\?2Fq'
 
 eval "$(thefuck --alias)"
 
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+fpath=(~/.zsh.d/ $fpath)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
