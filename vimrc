@@ -119,6 +119,7 @@ syntax enable
 
 colorscheme base16-solarized-dark
 set termguicolors
+" :h xterm-true-color
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
@@ -257,13 +258,6 @@ set completeopt=menuone,preview,longest
 command! -bang -nargs=0 -range=0 GitPush call asyncrun#run('<bang>', '', '-raw git push', 3, <line1>, <line2>)
 
 " 自定义 mapping
-
-" 上下移动行
-nnoremap _ ddkkp
-nnoremap - ddp
-
-vnoremap _ U
-vnoremap - u
 
 nnoremap <silent> bl :ls<CR>
 nnoremap <silent> bo :enew<CR>
@@ -421,6 +415,16 @@ let g:airline_powerline_fonts=1
 "let g:airline_theme='angr'
 let g:airline_theme='solarized'
 
+" tmuxline
+
+let g:tmuxline_preset = {
+      \'a'    : '#I #W',
+      \'b'    : '#(curl -s zh.wttr.in/ShangHai:JieYang\?format\="%%l%%20%%c%%20%%t%%20%%h&period=60")',
+      \'c'    : '',
+      \'x'    : '',
+      \'y'    : '%F %R',
+      \'z'    : '%A'}
+
 " Startify
 
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | endif
@@ -499,10 +503,6 @@ let g:SuperTabLongestHighlight = 1
 
 " 有性能问题，暂时不开启
 " autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
-
-" 自定义 iabbrev
-
-iabbrev @@ ganziqim@live.com
 
 " 自定义 autocmd
 

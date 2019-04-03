@@ -73,7 +73,7 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon ssh root_indicator dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status background_jobs battery todo time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status background_jobs battery todo)
 POWERLEVEL9K_BATTERY_LOW_THRESHOLD=25
 POWERLEVEL9K_TIME_FORMAT='%D{%Y.%m.%d %H:%M}'
 POWERLEVEL9K_DIR_SHOW_WRITABLE=true
@@ -149,7 +149,7 @@ alias ping='prettyping --nolegend'
 alias top='htop'
 alias help='tldr'
 alias cht='cht.sh'
-alias wttr='curl zh.wttr.in\/\?2Fq'
+alias wttr='curl zh.wttr.in\/ShangHai\?2Fq'
 
 eval "$(thefuck --alias)"
 
