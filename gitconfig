@@ -17,3 +17,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[includeIf "gitdir:~/work/"]
+    path = ~/.gitconfig-work
