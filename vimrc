@@ -254,6 +254,10 @@ set wildmenu
 
 set completeopt=menuone,preview,longest
 
+set wildignore+=*.swp,*.zip      " Common
+set wildignore+=*/tmp/*,*.so     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.exe  " Windows
+
 " 自定义 command
 
 command! -bang -nargs=0 -range=0 GitPush call asyncrun#run('<bang>', '', '-raw git push', 3, <line1>, <line2>)
@@ -483,14 +487,17 @@ map <leader>w <plug>(wildfire-fuel)
 
 " ctrlp 配置
 
-let g:ctrlp_map = 'tg'
+nnoremap <silent> tg :CtrlPMixed<CR>
+nnoremap <silent> tf :CtrlPBufTag<CR>
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|pyc|class|png|jpg|jpeg)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 " 使用最近的 .git 作为工作目录
-let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['pom.xml']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " supertab
 
