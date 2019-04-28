@@ -13,6 +13,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
@@ -168,7 +169,7 @@ set noswapfile
 set mouse=a
 
 " 高亮列 hi colorcolumn
-autocmd FileType python,c set colorcolumn=80
+" set colorcolumn by editorconfig:max_line_length
 
 " 设置不兼容 vi
 set nocp
@@ -185,20 +186,9 @@ set showmatch
 set foldenable
 set foldmethod=marker
 
-" Tab 切换成 4 个空格
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
-autocmd FileType html,javascript,css,yaml,json set tabstop=2
-autocmd FileType html,javascript,css,yaml,json set shiftwidth=2
-
-set smarttab
-
-" 以下格式的文件禁止 Tab 转换为空格
-autocmd FileType make,go set noexpandtab
-
-set autoindent
+" About tab
+" Set expandtab/tabstop/softtabstop/shiftwidth by editorconfig
+" See https://editorconfig.org/#overview
 set smartindent
 
 set autoread

@@ -6,6 +6,7 @@ all:
 	make tmux
 	make zsh
 	make git
+	make editorconfig
 
 update:
 	make vim-update
@@ -13,6 +14,7 @@ update:
 	make tmux-update
 	make zsh-update
 	make git-update
+	make editorconfig-update
 
 vim:
 	@cp ./vimrc ~/.vimrc
@@ -44,3 +46,9 @@ git:
 
 git-update:
 	@cp ~/.gitconfig ./gitconfig
+
+editorconfig:
+	@cp ./editorconfig ~/.editorconfig
+
+editorconfig-update:
+	@cp ~/.editorconfig ./editorconfig
