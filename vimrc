@@ -64,15 +64,16 @@ Plug 'junegunn/seoul256.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'morhetz/gruvbox'
 
-" deoplete on neovim and neocomplete on other
+" always use deoplete
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/neocomplete'
-  let g:neocomplete#enable_at_startup = 1
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
+let g:deoplete#enable_at_startup = 1
 
 call plug#end()
 
