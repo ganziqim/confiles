@@ -132,9 +132,11 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 alias gdiff="git diff"
 alias gstatus="git status"
 alias gstash="git stash"
-alias gcommit="git commit"
+alias gcommit="git cz"
 alias gamend="git commit --amend --no-edit"
 alias greset="git reset"
+# 清除已经合并到 master 的分支
+alias gbclear="git branch --merged master | grep -v '^\*\|  master' | xargs -n 1 git branch -d"
 
 # lazygit
 alias lg="lazygit"
@@ -157,3 +159,5 @@ eval "$(thefuck --alias)"
 
 fpath=(~/.zsh.d/ $fpath)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

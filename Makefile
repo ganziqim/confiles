@@ -7,6 +7,7 @@ all:
 	make zsh
 	make git
 	make editorconfig
+	make czrc
 
 update:
 	make vim-update
@@ -15,6 +16,7 @@ update:
 	make zsh-update
 	make git-update
 	make editorconfig-update
+	make czrc-update
 
 vim:
 	@cp ./vimrc ~/.vimrc
@@ -52,3 +54,9 @@ editorconfig:
 
 editorconfig-update:
 	@cp ~/.editorconfig ./editorconfig
+
+czrc:
+	@cp ./czrc ~/.czrc
+
+czrc-update:
+	@cp ~/.czrc ./czrc
