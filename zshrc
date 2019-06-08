@@ -105,14 +105,7 @@ export LANG=en_US.UTF-8
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Personal aliases
 
 alias vi="nvim"
 alias vim="nvim"
@@ -121,12 +114,15 @@ alias cat="bat"
 # git alias
 alias gfetch="git fetch"
 alias gfetchall="git fetch --all"
+alias gfetchp="git fetch -p"
 alias grebase="git rebase"
 alias grebasemaster="git rebase origin/master"
 alias gcheckout="git checkout"
+alias gcheckoutmaster="git checkout master"
 alias gadd="git add"
 alias gaddall="git add --all"
 alias gbranch="git branch"
+alias gbranchall="git branch -a"
 alias gpush="git push"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdiff="git diff"
@@ -137,6 +133,7 @@ alias gamend="git commit --amend --no-edit"
 alias greset="git reset"
 # 清除已经合并到 master 的分支
 alias gbclear="git branch --merged master | grep -v '^\*\|  master' | xargs -n 1 git branch -d"
+alias ggrep="git grep -nI --column"
 
 # lazygit
 alias lg="lazygit"
@@ -152,6 +149,7 @@ alias top='htop'
 alias help='tldr'
 alias cht='cht.sh'
 alias wttr='curl zh.wttr.in\/ShangHai\?2Fq'
+alias yoink='open -a Yoink'
 
 eval "$(thefuck --alias)"
 
