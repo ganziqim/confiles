@@ -43,3 +43,9 @@ czrc:
 
 czrc-update:
     @cp ~/.czrc ./czrc
+
+coc:
+    @cp ./coc-settings.json ~/.config/nvim/coc-settings.json
+
+coc-update:
+    @cp ~/.config/nvim/coc-settings.json ./coc-settings.json

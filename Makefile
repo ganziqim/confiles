@@ -8,6 +8,7 @@ all:
 	make git
 	make editorconfig
 	make czrc
+	make coc
 
 update:
 	make vim-update
@@ -17,6 +18,7 @@ update:
 	make git-update
 	make editorconfig-update
 	make czrc-update
+	make coc-update
 
 vim:
 	@cp ./vimrc ~/.vimrc
@@ -60,3 +62,9 @@ czrc:
 
 czrc-update:
 	@cp ~/.czrc ./czrc
+
+coc:
+	@cp ./coc-settings.json ~/.config/nvim/coc-settings.json
+
+coc-update:
+	@cp ~/.config/nvim/coc-settings.json ./coc-settings.json
