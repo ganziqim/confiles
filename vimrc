@@ -31,6 +31,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mzlogin/vim-markdown-toc'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'plasticboy/vim-markdown'
 Plug 'Raimondi/delimitMate'
 Plug 'ryanoasis/vim-devicons'
@@ -53,11 +54,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'yianwillis/vimcdoc'
 
 " Python Plugins
-Plug 'zchee/deoplete-jedi'
 
 " Golang Plugins
 Plug 'fatih/vim-go'
-"Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 " Themes
 Plug 'altercation/vim-colors-solarized'
@@ -65,17 +64,6 @@ Plug 'chriskempson/base16-vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'morhetz/gruvbox'
-
-" always use deoplete
-
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
 
 call plug#end()
 
@@ -410,6 +398,7 @@ let g:airline_powerline_fonts=1
 "let g:airline_theme='deus'
 "let g:airline_theme='angr'
 let g:airline_theme='solarized'
+let g:airline#extensions#coc#enabled = 1
 
 " tmuxline
 
