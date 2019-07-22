@@ -1,4 +1,4 @@
-.PHONY: all vim vim-update nvim nvim-update tmux tmux-update zsh zsh-update git git-update
+.PHONY: all vim vim-update nvim nvim-update tmux tmux-update zsh zsh-update git git-update global global-update
 
 all:
 	make vim
@@ -9,6 +9,7 @@ all:
 	make editorconfig
 	make czrc
 	make coc
+	make global
 
 update:
 	make vim-update
@@ -19,6 +20,7 @@ update:
 	make editorconfig-update
 	make czrc-update
 	make coc-update
+	make global-update
 
 vim:
 	@cp ./vimrc ~/.vimrc
@@ -68,3 +70,9 @@ coc:
 
 coc-update:
 	@cp ~/.config/nvim/coc-settings.json ./coc-settings.json
+
+global:
+	@cp ./globalrc ~/.globalrc
+
+global-update:
+	@cp ~/.globalrc ./globalrc

@@ -1,6 +1,6 @@
-all: vim nvim tmux zsh git editorconfig czrc
+all: vim nvim tmux zsh git editorconfig czrc global
 
-update: vim-update nvim-update tmux-update zsh-update git-update editorconfig-update czrc-update
+update: vim-update nvim-update tmux-update zsh-update git-update editorconfig-update czrc-update global
 
 vim:
     @cp ./vimrc ~/.vimrc
@@ -49,3 +49,9 @@ coc:
 
 coc-update:
     @cp ~/.config/nvim/coc-settings.json ./coc-settings.json
+
+global:
+    @cp ./globalrc ~/.globalrc
+
+global-update:
+    @cp ~/.globalrc ./globalrc
