@@ -89,6 +89,9 @@ export GO111MODULE=on
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export GTAGSLABEL=pygments
+export GTAGSCONF="$HOME/.globalrc"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
