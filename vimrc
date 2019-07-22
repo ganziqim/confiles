@@ -26,6 +26,7 @@ Plug 'hotoo/pangu.vim'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'lfv89/vim-interestingwords'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
@@ -39,7 +40,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/vimmake'
+Plug 'skywind3000/gutentags_plus'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -372,6 +373,11 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='solarized'
 let g:airline#extensions#coc#enabled = 1
 
+" coc.nvim
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
+                                           \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 " tmuxline
 
 let g:tmuxline_preset = {
@@ -458,6 +464,33 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
+
+" vim-gutentags
+
+" copied from https://zhuanlan.zhihu.com/p/36279445
+" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+" 同时开启 ctags 和 gtags 支持：
+let g:gutentags_modules = []
+if executable('ctags')
+    let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+    let g:gutentags_modules += ['gtags_cscope']
+endif
+" 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+" 禁用 gutentags 自动加载 gtags 数据库的行为
+let g:gutentags_auto_add_gtags_cscope = 0
+let g:gutentags_plus_switch = 1
+let g:gutentags_define_advanced_commands = 1
+set csprg=gtags-cscope
 
 " pangu.vim 配置
 
