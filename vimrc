@@ -5,6 +5,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+for i in range(97,122)
+  let c = nr2char(i)
+  exec "map \e" .c." <A-".c.">"
+  exec "map! \e".c." <A-".c.">"
+endfor
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
@@ -28,6 +34,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+Plug 'matze/vim-move'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
 Plug 'michaeljsmith/vim-indent-object'
@@ -251,8 +258,8 @@ nnoremap <silent> bq :bprevious<CR>
 nnoremap <silent> bp :bprevious<CR>
 nnoremap <silent> bd :bdelete<CR>
 
-nnoremap J 3<C-y>
-nnoremap K 3<C-e>
+nnoremap J 4<C-y>
+nnoremap K 4<C-e>
 
 nnoremap <silent> <C-s> :w<CR>
 
