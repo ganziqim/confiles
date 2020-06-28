@@ -14,9 +14,10 @@ endfor
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-airline'
+Plug 'brglng/vim-im-select'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'conweller/findr.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'easymotion/vim-easymotion'
@@ -34,7 +35,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
-Plug 'matze/vim-move'
+"Plug 'matze/vim-move'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-startify'
 Plug 'michaeljsmith/vim-indent-object'
@@ -49,9 +50,11 @@ Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/gutentags_plus'
 Plug 'svermeulen/vim-easyclip'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'voldikss/vim-translate-me'
@@ -116,21 +119,23 @@ syntax enable
 "hi Search cterm=reverse gui=reverse
 "set termguicolors
 
-colorscheme base16-solarized-dark
+"colorscheme solarized
 set termguicolors
+let base16colorspace=256
 " :h xterm-true-color
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+colorscheme base16-solarized-dark
+
 "colorscheme gruvbox
 "let g:gruvbox_contrast_dark='soft'
 
-"colorscheme solarized
 
 "let g:seoul256_background = 235
 "colorscheme seoul256
 
-"hi Normal guibg=#000000
+"hi Normal guibg=#001f27
 "hi Search cterm=reverse ctermfg=2 guifg=Black guibg=Blue
 
 
@@ -245,9 +250,14 @@ set wildignore+=*.swp,*.zip      " Common
 set wildignore+=*/tmp/*,*.so     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.exe  " Windows
 
+" 拼写检查
+set spell spelllang=en_us,cjk
+
 " 自定义 command
 
 command! -bang -nargs=0 -range=0 GitPush call asyncrun#run('<bang>', '', '-raw git push', 3, <line1>, <line2>)
+
+command! GBlame Gblame
 
 " 自定义 mapping
 
@@ -312,14 +322,18 @@ let g:vmt_list_item_char = '-'
 
 " grepper
 
-nnoremap <leader>g :Grepper -tool grep<CR>
-nnoremap <leader>G :Grepper -tool grep -cword<CR>
+nnoremap <leader>g :Grepper -tool rg<CR>
+nnoremap <leader>G :Grepper -tool rg -cword<CR>
 command! TODO :Grepper
             \ -noprompt
             \ -tool git
             \ -grepprg git grep -nIi '\(TODO\|FIXME\)'
 nmap go <plug>(GrepperOperator)
 xmap go <plug>(GrepperOperator)
+let g:grepper = {
+    \ 'highlight': 1,
+    \ 'operator': {'tools': ['rg'], 'prompt': 0}
+    \ }
 
 " easymotion
 
@@ -367,6 +381,8 @@ nnoremap <leader>hp :GitGutterPrevHunk<CR>
 nnoremap <leader>ha :GitGutterStageHunk<CR>
 nnoremap <leader>hr :GitGutterUndoHunk<CR>
 
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 " airline
 
 let g:airline#extensions#tabline#enabled=1
@@ -412,6 +428,10 @@ let g:startify_change_to_vcs_root = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
+
+" im-selecbrglng/vim-im-select
+
+let g:im_select_default = 'com.apple.keylayout.ABC'
 
 " NERDTree 配置
 
@@ -498,6 +518,10 @@ let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_plus_switch = 1
 let g:gutentags_define_advanced_commands = 1
 set csprg=gtags-cscope
+
+" findr.vim
+
+nnoremap <silent> gr :Findr<CR>
 
 " pangu.vim 配置
 
