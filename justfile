@@ -55,3 +55,9 @@ global:
 
 global-update:
     @cp ~/.globalrc ./globalrc
+
+hyper:
+    @cp ./hyper.js ~/.hyper.js
+
+hyper-update:
+    @cp ~/.hyper.js ./hyper.js
