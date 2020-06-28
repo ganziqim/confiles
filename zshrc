@@ -77,8 +77,6 @@ POWERLEVEL9K_BATTERY_LOW_THRESHOLD=25
 POWERLEVEL9K_TIME_FORMAT='%D{%Y.%m.%d %H:%M}'
 POWERLEVEL9K_DIR_SHOW_WRITABLE=true
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -126,6 +124,7 @@ alias gpush="git push"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdiff="git diff"
 alias gstatus="git status"
+alias gstatusfpp="git status | fpp"
 alias gstash="git stash"
 alias gcommit="git cz"
 alias gamend="git commit --amend --no-edit"
@@ -133,6 +132,12 @@ alias greset="git reset"
 # 清除已经合并到 master 的分支
 alias gbclear="git branch --merged master | grep -v '^\*\|  master' | xargs -n 1 git branch -d"
 alias ggrep="git grep -nI --column"
+alias gswitch="git switch"
+alias grestore="git restore"
+alias gsync="legit sync"
+alias gpublish="legit publish"
+alias gunpublish="legit unpublish"
+alias gundo="legit undo"
 
 # lazygit
 alias lg="lazygit"
@@ -149,6 +154,8 @@ alias help='tldr'
 alias cht='cht.sh'
 alias wttr='curl zh.wttr.in\/ShangHai\?2Fq'
 alias yoink='open -a Yoink'
+
+alias ':q'='exit'
 
 eval "$(thefuck --alias)"
 
@@ -169,3 +176,10 @@ if [ -f ~/.custom-zshrc ]; then
 else
     print "custom-zshrc not found."
 fi
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+source $ZSH/oh-my-zsh.sh
+rm -f ~/.zcompdump; compinit
