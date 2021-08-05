@@ -10,6 +10,7 @@ all:
 	make czrc
 	make coc
 	make global
+	make ideavim
 
 update:
 	make vim-update
@@ -21,6 +22,7 @@ update:
 	make czrc-update
 	make coc-update
 	make global-update
+	make ideavim-update
 
 vim:
 	@cp ./vimrc ~/.vimrc
@@ -82,3 +84,9 @@ hyper:
 
 hyper-update:
 	@cp ~/.hyper.js ./hyper.js
+
+ideavim:
+	@cp ./ideavimrc ~/.ideavimrc
+
+ideavim-update:
+	@cp ~/.ideavimrc ./ideavimrc

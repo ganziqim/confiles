@@ -1,0 +1,79 @@
+source ~/.vimrc
+
+""" Map leader to space ---------------------
+let mapleader=" "
+
+""" Plugins  --------------------------------
+set surround
+"set multiple-cursors
+"set commentary
+"set argtextobj
+set easymotion
+"set textobj-entire
+"set ReplaceWithRegister
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+""" Common settings -------------------------
+set clipboard+=ideaput
+set hlsearch
+set ignorecase
+set incsearch
+set number
+set showmode
+set showcmd
+set so=5
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Mappings --------------------------------
+map <leader>f <Plug>(easymotion-s)
+map <leader>e <Plug>(easymotion-f)
+
+map <leader>d :action Debug<CR>
+map <leader>r :action RenameElement<CR>
+map <leader>c :action Stop<CR>
+map <leader>z :action ToggleDistractionFreeMode<CR>
+
+map <leader>s :action SelectInProjectView<CR>
+map <leader>a :action Annotate<CR>
+map <leader>h :action Vcs.ShowTabbedFileHistory<CR>
+map <S-Space> :action GotoNextError<CR>
+
+map <leader>b :action ToggleLineBreakpoint<CR>
+map <leader>o :action FileStructurePopup<CR>
+
+"map / <Plug>(easymotion-sn)
+map / :action Find<CR>
+
+map bq :action PreviousTab<CR>
+map bn :action NextTab<CR>
+map bd :action CloseEditor<CR>
+
+map <leader>g :action FindInPath<CR>
+
+map go :action GotoDeclaration<CR>
+map gn :action VcsShowNextChangeMarker<CR>
+map gp :action VcsShowPrevChangeMarker<CR>
+
+map gb :action ActivateStructureToolWindow<CR>
+map gt :action ActivateProjectToolWindow<CR>
+map gd :action CloseActiveTab<CR>
+
+map n :action FindNext<CR>:action EditorEscape<CR>
+map <S-n> :action FindPrevious<CR>:action EditorEscape<CR>
+
+map <leader>t :action $EditorTranslateAction<CR>
+
+map <leader>z :action ToggleZenMode<CR>
+
+map <leader>\ :action SplitVertically<CR>
+
+map <leader>xx :action CloseAllEditors<CR>
+map <leader>cc :action CloseAllEditorsButActive<CR>
+
+map siw viwp

@@ -1,6 +1,7 @@
-all: vim nvim tmux zsh git editorconfig czrc global
+all: vim nvim tmux zsh git editorconfig czrc global ideavim
 
-update: vim-update nvim-update tmux-update zsh-update git-update editorconfig-update czrc-update global
+update: vim-update nvim-update tmux-update zsh-update git-update
+editorconfig-update czrc-update global-update ideavim-update
 
 vim:
     @cp ./vimrc ~/.vimrc
@@ -61,3 +62,9 @@ hyper:
 
 hyper-update:
     @cp ~/.hyper.js ./hyper.js
+
+ideavim:
+    @cp ./ideavimrc ~/.ideavimrc
+
+ideavim-update:
+    @cp ~/.ideavimrc ./ideavimrc
