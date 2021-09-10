@@ -1,28 +1,8 @@
-.PHONY: all vim vim-update nvim nvim-update tmux tmux-update zsh zsh-update git git-update global global-update
+.PHONY: all vim vim-update nvim nvim-update tmux tmux-update zsh zsh-update git git-update editorconfig editorconfig-update czrc czrc-update coc coc-update global global-update hyper hyper-update ideavim ideavim-update
 
-all:
-	make vim
-	make nvim
-	make tmux
-	make zsh
-	make git
-	make editorconfig
-	make czrc
-	make coc
-	make global
-	make ideavim
+all: vim nvim tmux zsh git editorconfig czrc coc global hyper ideavim
 
-update:
-	make vim-update
-	make nvim-update
-	make tmux-update
-	make zsh-update
-	make git-update
-	make editorconfig-update
-	make czrc-update
-	make coc-update
-	make global-update
-	make ideavim-update
+update: vim-update nvim-update tmux-update zsh-update git-update editorconfig-update czrc-update coc-update global-update hyper-update ideavim-update
 
 vim:
 	@cp ./vimrc ~/.vimrc
@@ -30,8 +10,7 @@ vim:
 vim-update:
 	@cp ~/.vimrc ./vimrc
 
-nvim:
-	make vim
+nvim: vim
 	@cp ./init.vim ~/.config/nvim/init.vim
 
 nvim-update:
